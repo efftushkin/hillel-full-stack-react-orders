@@ -44,7 +44,7 @@ export function ClientsPage() {
       await dispatch(saveClient({ name: newClient.name })).unwrap()
       setNewClient({ name: '' })
       setIsAdding(false)
-      setErrors((currentErrors) => ({ ...currentErrors, new: undefined }))
+      resetErrors()
       setMessage('Client saved')
     } catch (error) {
       setErrors((currentErrors) => ({
@@ -86,6 +86,10 @@ export function ClientsPage() {
     } catch (error) {
       setMessage(error.message || String(error))
     }
+  }
+
+  function resetErrors() {
+    setErrors((currentErrors) => ({ ...currentErrors, new: undefined }))
   }
 
   return (
@@ -146,6 +150,7 @@ export function ClientsPage() {
                       onClick={() => {
                         setIsAdding(false)
                         setNewClient({ name: '' })
+                        resetErrors()
                       }}
                     >
                       Cancel

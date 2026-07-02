@@ -54,7 +54,7 @@ export function ProductsPage() {
       ).unwrap()
       setNewProduct({ name: '', price: '' })
       setIsAdding(false)
-      setErrors((currentErrors) => ({ ...currentErrors, new: undefined }))
+      resetErrors()
       setMessage('Product saved')
     } catch (error) {
       setErrors((currentErrors) => ({
@@ -103,6 +103,10 @@ export function ProductsPage() {
     } catch (error) {
       setMessage(error.message || String(error))
     }
+  }
+
+  function resetErrors() {
+    setErrors((currentErrors) => ({ ...currentErrors, new: undefined }))
   }
 
   return (
@@ -185,6 +189,7 @@ export function ProductsPage() {
                       onClick={() => {
                         setIsAdding(false)
                         setNewProduct({ name: '', price: '' })
+                        resetErrors()
                       }}
                     >
                       Cancel
